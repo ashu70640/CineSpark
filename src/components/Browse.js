@@ -5,21 +5,44 @@ import GptSearch from "./GptSearch";
 import { Header } from "./Header";
 import MainContainer from "./MainContainer";
 import SecondaryContainer from "./SecondaryContainer";
+import { useRef, useState } from "react";
 
 const Browse = () => {
   const showGptSearch = useSelector((store) => store.gpt.showGptSearch);
+  const [selectedMovieId, setSelectedMovieId] = useState(null);
+  const [isPlaying, setIsPlaying] = useState(true);
+  const mainContainerRef = useRef(null);
+  const handleMovieClick = (movieId) => {
+    setSelectedMovieId(movieId);
+    console.log(movieId);
+    setIsPlaying(true); // Auto-play the new trailer
+  };
   useNowPlayingMovies();
   usePopularMovies();
+  const scrollToTrailer = () => {
+    if (mainContainerRef.current) {
+      mainContainerRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  };
   return (
     <div>
       <Header />
       {showGptSearch ? (
         <GptSearch />
       ) : (
-        <>
-          <MainContainer />
-          <SecondaryContainer />
-        </>
+        <div ref={mainContainerRef}>
+          <MainContainer
+            className="bg-black min-h-screen"
+            movieId={selectedMovieId}
+            isPlaying={isPlaying}
+            setIsPlaying={setIsPlaying}
+            onMovieClick={handleMovieClick}
+          />
+          <SecondaryContainer
+            onMovieClick={handleMovieClick}
+            scrollToTrailer={scrollToTrailer}
+          />
+        </div>
       )}
 
       {/*
