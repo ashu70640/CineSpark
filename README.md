@@ -1,6 +1,6 @@
 # CineSpark 🎬
 
-CineSpark is a dynamic movie browsing application built with React, offering an immersive experience for movie enthusiasts. Powered by the TMDB API for real-time movie data, it features trailer playback, personalized filtering, a watchlist, and a GPT-powered search. With a responsive design and seamless navigation, CineSpark delivers a Netflix-inspired platform.
+CineSpark is a trailer-centric application built with React, designed to immerse users in a world of movie trailers. Powered by the TMDB API for real-time trailer data, CineSpark allows users to browse, filter, and save trailers to a watchlist, with a GPT-powered search for trailer recommendations. Featuring a responsive design and seamless trailer playback, CineSpark offers a Netflix-inspired platform for trailer enthusiasts.
 
 ## Features
 
@@ -12,19 +12,19 @@ CineSpark is a dynamic movie browsing application built with React, offering an 
 - **Sign Out**: Seamless logout with authentication state cleanup.
 
 ### Browse (After Authentication)
-- **Header**: Responsive navigation bar.
-- **Main Movie Section**:
+- **Header**: Responsive navigation bar for easy access.
+- **Featured Trailer Section**:
   - Background trailer playback (YouTube video, auto-playing and muted).
-  - Movie title and description styled with Tailwind CSS.
-- **Movie Suggestions**:
-  - Multiple movie lists (Now Playing, Popular, Trending, etc.) via TMDB API.
-  - Custom hooks (`useNowPlayingMovies`, `usePopularMovies`) for data fetching.
-- **Filters for User Preferences**: Filter movies by genres, ratings, or release dates.
-- **Watchlist Option**: Add/remove movies to a persistent watchlist (stored locally).
+  - Trailer title and description styled with Tailwind CSS.
+- **Trailer Collections**:
+  - Multiple trailer lists (Now Playing, Popular, Trending, etc.) fetched via TMDB API.
+  - Custom hooks (`useNowPlayingMovies`, `usePopularMovies`) to fetch movies and extract trailers.
+- **Filters for User Preferences**: Filter trailers by movie genres, ratings, or release dates.
+- **Watchlist Option**: Add/remove trailers to a persistent watchlist (stored locally).
 
-### CineSpark-GPT (Movie Search)
-- **Search Bar**: GPT-powered movie recommendation search.
-- **Movie Suggestions**: Fetch suggestions from TMDB based on GPT API results.
+### CineSpark-GPT (Trailer Search)
+- **Search Bar**: GPT-powered search for trailer recommendations.
+- **Trailer Suggestions**: Fetch trailers from TMDB based on GPT API results.
 - **Multi-Language Support**: Toggle search bar language for accessibility.
 
 ### Performance & Optimization
@@ -32,10 +32,10 @@ CineSpark is a dynamic movie browsing application built with React, offering an 
 - **Responsive Design**: Fully responsive UI with Tailwind CSS.
 
 ## Tech Stack
-- **Frontend**: JavaScript, React, Tailwind CSS 
+- **Frontend**: React, Tailwind CSS
 - **State Management**: Redux (`userSlice`, `movieSlice`, `gptSlice`)
 - **Authentication**: Firebase
-- **APIs**: TMDB API, Open AI GPT API
+- **APIs**: TMDB API (for trailer data), Open AI GPT API (for search recommendations)
 - **Routing**: React Router
 - **Deployment**: Deployed to production (e.g., Vercel/Netlify)
 - **Environment**: Secured API keys in `.env` file
@@ -43,11 +43,11 @@ CineSpark is a dynamic movie browsing application built with React, offering an 
 ## Project Structure
 - **Login/Signup**: Authentication forms and routing logic.
 - **Browse Page**:
-  - `MainContainer`: Main movie with trailer background.
-  - `SecondaryContainer`: Movie suggestion lists with filtering and watchlist.
-- **CineSpark-GPT**: Search bar and movie suggestion container.
-- **Custom Hooks**: `useNowPlayingMovies`, `usePopularMovies`, `useMovieTrailer`.
-- **Components**: `Header`, `MovieCard`, `MovieList`.
+  - `MainContainer`: Displays the featured trailer with playback.
+  - `SecondaryContainer`: Lists trailer collections with filtering and watchlist features.
+- **CineSpark-GPT**: Search bar and trailer suggestion container.
+- **Custom Hooks**: `useNowPlayingMovies`, `usePopularMovies`, `useMovieTrailer` for trailer data.
+- **Components**: `Header`, `MovieCard`, `MovieList` (adapted for trailers).
 
 ## Setup Instructions
 
