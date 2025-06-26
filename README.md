@@ -1,69 +1,64 @@
-# Netflix-GPT
+# CineSpark 🎬
 
--create react app
--configured tailwind css
--header
--Routing of App
--Login Form
--Sign Up form
--Form Validation
--useRef Hook
--Used Firebase for building authentication
--Deploying our app to production
--Create SignUp User Account
--Impliment Sign In user Api
--Created Redux Store with userSlice
--Implimented sign out
--Update Profile
--Bugfix:sign up user displayname and profile picture update
--bigfix:-if the user is not logged in redirect to /login page and vice-versa
--ubsubscribe to the onAuthStateChanges callback
--Add hardcoded value to the constants file
--Register TMDB API & create an app & get access token
--Get Data from TMDB now playing movies list API
--Custom hook for now playing Movies
--create movieSlice
--Update Store with movies Data
--Planning for MainContainer & secondaryContainer
--fetch Data for Trailer video data
--Update store with trailer video data
--embedded the youtube video and make it autoplay and mute
--tailwind classes to make main Container look awesome
--Build Secondary Component
--Build the movie list
--build movies card
--found out tmdb image CDN URL
--made the browse page better with tailwindcss
--usePopularmovies custom hook
--gpt search feature
--Gpt search bar
--(Bonus) Multi-language Feature in our App.
--Integrate the Gpt API
--GPT Search Open AI Api Key
--GPT search api call
--fetched GPT movie suggestion from TMDB API
--Created gptSlices added data
--Reused movie list component to make movie suggestion container
--Memoisation of api data
--added .env file
--Made our Site Responsive
+CineSpark is a trailer-centric application built with React, designed to immerse users in a world of movie trailers. Powered by the TMDB API for real-time trailer data, CineSpark allows users to browse, filter, and save trailers to a watchlist, with a GPT-powered search for trailer recommendations. Featuring a responsive design and seamless trailer playback, CineSpark offers a Netflix-inspired platform for trailer enthusiasts.
 
-# Features
+## Features
 
-->login/signup page
--sign In/sign up Form  
--redirect to browse page
+### Authentication
+- **Login/Signup Page**: Secure authentication using Firebase.
+- **Sign In/Sign Up Form**: Intuitive forms with validation.
+- **Redirects**: Redirect to `/login` if not authenticated, or to `/browse` after login.
+- **User Profile**: Update display name and profile picture during signup.
+- **Sign Out**: Seamless logout with authentication state cleanup.
 
-->Browse(after authentication)
--->Header
--->Main Movie
--Trailer in background
--Title and discription
----->Movie suggestions
--movies list\*N
+### Browse (After Authentication)
+- **Header**: Responsive navigation bar for easy access.
+- **Featured Trailer Section**:
+  - Background trailer playback (YouTube video, auto-playing and muted).
+  - Trailer title and description styled with Tailwind CSS.
+- **Trailer Collections**:
+  - Multiple trailer lists (Now Playing, Popular, Trending, etc.) fetched via TMDB API.
+  - Custom hooks (`useNowPlayingMovies`, `usePopularMovies`) to fetch movies and extract trailers.
+- **Filters for User Preferences**: Filter trailers by movie genres, ratings, or release dates.
+- **Watchlist Option**: Add/remove trailers to a persistent watchlist (stored locally).
 
-->netflix-gpt
--search bar
--movie suggestion
+### CineSpark-GPT (Trailer Search)
+- **Search Bar**: GPT-powered search for trailer recommendations.
+- **Trailer Suggestions**: Fetch trailers from TMDB based on GPT API results.
+- **Multi-Language Support**: Toggle search bar language for accessibility.
 
-->used a concept of memoisation to avoid making api calls again and again instead will pick the data from redux store.
+### Performance & Optimization
+- **Memoization**: Cache API data in Redux to avoid redundant calls.
+- **Responsive Design**: Fully responsive UI with Tailwind CSS.
+
+## Tech Stack
+- **Frontend**: React, Tailwind CSS
+- **State Management**: Redux (`userSlice`, `movieSlice`, `gptSlice`)
+- **Authentication**: Firebase
+- **APIs**: TMDB API (for trailer data), Open AI GPT API (for search recommendations)
+- **Routing**: React Router
+- **Deployment**: Deployed to production (e.g., Vercel/Netlify)
+- **Environment**: Secured API keys in `.env` file
+
+## Project Structure
+- **Login/Signup**: Authentication forms and routing logic.
+- **Browse Page**:
+  - `MainContainer`: Displays the featured trailer with playback.
+  - `SecondaryContainer`: Lists trailer collections with filtering and watchlist features.
+- **CineSpark-GPT**: Search bar and trailer suggestion container.
+- **Custom Hooks**: `useNowPlayingMovies`, `usePopularMovies`, `useMovieTrailer` for trailer data.
+- **Components**: `Header`, `MovieCard`, `MovieList` (adapted for trailers).
+
+## Setup Instructions
+
+### Prerequisites
+- Node.js (v14 or higher)
+- Firebase account
+- TMDB API key
+- Open AI API key
+
+### Installation
+1. **Clone the Repository**:
+   ```bash
+   git clone https://github.com/your-username/cinespark.git
+   cd cinespark
