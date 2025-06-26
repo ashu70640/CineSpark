@@ -1,10 +1,14 @@
 import Body from "./components/Body";
 import { Provider } from "react-redux";
 import appStore from "./utils/appStore";
+import { Suspense } from "react";
+import LoadingFallback from "./components/LoadingFallback";
 function App() {
   return (
     <Provider store={appStore}>
-      <Body />
+      <Suspense fallback={<LoadingFallback />}>
+        <Body />
+      </Suspense>
     </Provider>
   );
 }

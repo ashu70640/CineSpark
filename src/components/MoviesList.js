@@ -1,5 +1,7 @@
 import React from "react";
 import MovieCard from "./MovieCard";
+import { useDispatch } from "react-redux";
+import { setIsPlaying, setSelectedMovieId } from "../utils/moviesSlice";
 
 const MoviesList = ({
   title,
@@ -7,15 +9,19 @@ const MoviesList = ({
   addToWatchlist,
   fullWidth,
   watchlist = [],
-  onMovieClick,
+
   scrollToTrailer,
 }) => {
+  const dispatch = useDispatch();
+  const validMovies =
+    movies?.filter((movie) => movie && movie.id && movie.poster_path) || [];
   const handleMovieClick = (movieId) => {
-    onMovieClick(movieId); // Update the trailer
+    dispatch(setSelectedMovieId(movieId)); // Update the trailer
 
-    scrollToTrailer(); // Scroll to the trailer section
+    dispatch(setIsPlaying(true)); //Auto-pay the new trailer
+
     setTimeout(() => {
-      scrollToTrailer();
+      scrollToTrailer(); // Scroll to the trailer section
     }, 100);
   };
   console.log(movies);

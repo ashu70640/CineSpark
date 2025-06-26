@@ -6,7 +6,7 @@ import { addFilteredMovies } from "../utils/moviesSlice";
 import Watchlist from "./WatchList";
 import { API_OPTIONS } from "../utils/constants";
 
-const SecondaryContainer = ({ onMovieClick, scrollToTrailer }) => {
+const SecondaryContainer = ({ scrollToTrailer }) => {
   const dispatch = useDispatch();
   const movies = useSelector((store) => store.movies);
   const [isLoading, setIsLoading] = useState(false);
@@ -71,7 +71,6 @@ const SecondaryContainer = ({ onMovieClick, scrollToTrailer }) => {
             fullWidth
             watchlist={watchlist}
             scrollToTrailer={scrollToTrailer}
-            onMovieClick={onMovieClick}
           />
 
           <MoviesList
@@ -79,7 +78,6 @@ const SecondaryContainer = ({ onMovieClick, scrollToTrailer }) => {
             movies={movies.nowPlayingMovies}
             addToWatchlist={addToWatchlist}
             fullWidth
-            onMovieClick={onMovieClick}
             scrollToTrailer={scrollToTrailer}
           />
           <MoviesList
@@ -87,7 +85,6 @@ const SecondaryContainer = ({ onMovieClick, scrollToTrailer }) => {
             movies={movies.nowPlayingMovies}
             addToWatchlist={addToWatchlist}
             fullWidth
-            onMovieClick={onMovieClick}
             scrollToTrailer={scrollToTrailer}
           />
           <MoviesList
@@ -95,30 +92,26 @@ const SecondaryContainer = ({ onMovieClick, scrollToTrailer }) => {
             movies={movies.popularMovies}
             addToWatchlist={addToWatchlist}
             fullWidth
-            onMovieClick={onMovieClick}
             scrollToTrailer={scrollToTrailer}
           />
           <MoviesList
             title="Upcoming Movies"
-            movies={movies.nowPlayingMovies}
+            movies={movies.upcomingMovies}
             addToWatchlist={addToWatchlist}
             fullWidth
-            onMovieClick={onMovieClick}
             scrollToTrailer={scrollToTrailer}
           />
           <MoviesList
-            title="Horror"
-            movies={movies.nowPlayingMovies}
+            title="Top Rated"
+            movies={movies.topRatedMovies}
             addToWatchlist={addToWatchlist}
             fullWidth
-            onMovieClick={onMovieClick}
             scrollToTrailer={scrollToTrailer}
           />
         </div>
         <Watchlist
           watchlist={watchlist}
           setWatchlist={setWatchlist}
-          onMovieClick={onMovieClick}
           scrollToTrailer={scrollToTrailer}
         />
       </div>

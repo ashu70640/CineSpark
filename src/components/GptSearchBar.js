@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import lang from "../utils/languageConstants";
 import { useDispatch, useSelector } from "react-redux";
 import openAI from "../utils/openai";
@@ -8,6 +8,7 @@ import { addGptMovieResult } from "../utils/GptSlice";
 const GptSearchBar = () => {
   const dispatch = useDispatch();
   const langKey = useSelector((store) => store.config.lang);
+  const [searchQuery, setSearchQuery] = useState("");
   const searchText = useRef(null);
 
   const searchMovieTMDB = async (movie) => {
@@ -25,11 +26,12 @@ const GptSearchBar = () => {
 
   const handleGptSearchClick = async () => {
     // Implement the GPT search logic here
-    console.log(searchText.current.value);
+    if (!searchQuery) return;
+    console.log(searchQuery);
     //make an API call to GPT API and get Movie Resultsasync function main() {
     const gptQuery =
       "Act as a Movie Recommendation system and suggest some movies for the query :" +
-      searchText.current.value +
+      searchQuery +
       ". only give me names of 5 movies. comma seperated like the example result given ahead. Example Result: Gadar , Sholay, Don, Golmaal, Koi Mil Gaya";
 
     const gptResults = await openAI.chat.completions.create({
@@ -54,6 +56,12 @@ const GptSearchBar = () => {
     );
   };
 
+  useEffect(() => {
+    const delayDebounceFn = setTimeout(() => {
+      setSearchQuery(searchText.current?.value || "");
+    }, 300);
+    return () => clearTimeout(delayDebounceFn);
+  }, [searchText.current?.value]);
   return (
     <div className="pt-[40%] md:pt-[10%] flex justify-center">
       <form

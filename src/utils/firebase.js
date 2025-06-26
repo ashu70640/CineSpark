@@ -13,7 +13,7 @@ const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_KEY,
   authDomain: "netflix-gpt-62f80.firebaseapp.com",
   projectId: "netflix-gpt-62f80",
-  storageBucket: "netflix-gpt-62f80.appspot.com",
+  storageBucket: "netflix-gpt-62f80.firebasestorage.app",
   messagingSenderId: "480666162986",
   appId: "1:480666162986:web:e7a8cd01a9ece7441cb053",
   measurementId: "G-54CHXQMKV7",

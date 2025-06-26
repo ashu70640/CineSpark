@@ -1,11 +1,14 @@
 import React from "react";
 import { IMG_CDN_URL } from "../utils/constants";
+import { useDispatch } from "react-redux";
+import { setIsPlaying, setSelectedMovieId } from "../utils/moviesSlice";
 const Watchlist = ({
   watchlist,
   setWatchlist,
-  onMovieClick,
+
   scrollToTrailer,
 }) => {
+  const dispatch = useDispatch();
   const removeFromWatchlist = (movieId) => {
     const updatedWatchlist = watchlist.filter((movie) => movie.id !== movieId);
     setWatchlist(updatedWatchlist);
@@ -13,10 +16,10 @@ const Watchlist = ({
   };
 
   const handleMovieClick = (movieId) => {
-    onMovieClick(movieId); // Update the trailer
-    scrollToTrailer(); // Scroll to the trailer section
+    dispatch(setSelectedMovieId(movieId)); // Update the trailer
+    dispatch(setIsPlaying(true)); //Auto play the new trailer
     setTimeout(() => {
-      scrollToTrailer();
+      scrollToTrailer(); // Scroll to the trailer section
     }, 100);
   };
   return (

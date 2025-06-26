@@ -10,7 +10,7 @@ const VideoTitle = ({ title, overview, isPlaying, setIsPlaying }) => {
           onClick={() => setIsPlaying(!isPlaying)}
           className="bg-sky-500 text-white py-1 md:py-4 px-2 md:px-12 text-xl rounded-md hover:bg-opacity-50"
         >
-          {isPlaying ? "❚❚ Pause" : "▶️ Play"}
+          {isPlaying ? "❚❚ Pause" : "▷ Play"}
         </button>
         <button className="hidden md:inline-block bg-gray-600 text-white p-2  px-12 text-xl rounded-md mx-4">
           More Info
