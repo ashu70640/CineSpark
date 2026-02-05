@@ -73,7 +73,7 @@ The UI prioritizes immersive visuals, fast interaction, and smooth responsivenes
 
 ### Frontend
 
-- React (Vite)
+- React
 - Redux Toolkit
 - Tailwind CSS
 
