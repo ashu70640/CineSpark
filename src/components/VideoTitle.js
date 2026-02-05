@@ -1,18 +1,57 @@
 import React from "react";
 
-const VideoTitle = ({ title, overview, isPlaying, setIsPlaying }) => {
+const VideoTitle = ({
+  title,
+  overview,
+  isPlaying,
+  setIsPlaying,
+  onMoreInfo,
+}) => {
   return (
-    <div className="w-screen aspect-video bg bg-gradient-to-r from-black  absolute pt-[25%] px-6 md:px-12 text-white">
-      <h1 className="text-2xl md:text-6xl font-bold">{title}</h1>
-      <p className="hidden md:inline-block py-6 text-lg w-1/2">{overview}</p>
-      <div className="my-1 md:m-0">
+    <div className="relative z-10 text-white max-w-2xl px-1 sm:px-0">
+      {/* Title */}
+      <h1 className="text-2xl sm:text-4xl md:text-6xl font-extrabold leading-tight">
+        {title}
+      </h1>
+
+      {/* Overview */}
+      <p
+        className="mt-3 text-sm sm:text-base md:text-lg
+                 text-white/80
+                 line-clamp-2 md:line-clamp-none
+                 md:w-3/4"
+      >
+        {overview}
+      </p>
+
+      {/* Actions */}
+      <div className="mt-4 flex flex-wrap items-center gap-3">
+        {/* Play / Pause */}
         <button
           onClick={() => setIsPlaying(!isPlaying)}
-          className="bg-sky-500 text-white py-1 md:py-4 px-2 md:px-12 text-xl rounded-md hover:bg-opacity-50"
+          className="flex items-center gap-2
+                   bg-amber-400 text-black
+                   px-4 py-2 sm:px-6 sm:py-3
+                   text-sm sm:text-base font-semibold
+                   rounded-lg
+                   hover:bg-amber-300
+                   active:scale-[0.97]
+                   transition-all"
         >
           {isPlaying ? "❚❚ Pause" : "▷ Play"}
         </button>
-        <button className="hidden md:inline-block bg-gray-600 text-white p-2  px-12 text-xl rounded-md mx-4">
+
+        {/* More Info */}
+        <button
+          onClick={onMoreInfo}
+          className="hidden sm:flex items-center
+                   bg-white/20 text-white
+                   px-4 py-2 sm:px-6 sm:py-3
+                   text-sm sm:text-base font-medium
+                   rounded-lg
+                   hover:bg-white/30
+                   transition"
+        >
           More Info
         </button>
       </div>

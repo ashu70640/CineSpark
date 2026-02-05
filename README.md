@@ -1,4 +1,4 @@
-# Netflix-GPT
+## CineSpark – AI‑powered movie discovery
 
 -create react app
 -configured tailwind css

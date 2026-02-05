@@ -15,26 +15,19 @@ const VideoBackground = ({ movieId, isPlaying }) => {
   }
 
   return (
-    <div className="w-screen">
-      {/* <iframe
-        className="w-screen aspect-video"
-        src={
-          "https://www.youtube.com/embed/" +
-          trailerVideo?.key +
-          "?&autoplay=1&mute=1"
-        }
-        title="YouTube video player"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        referrerpolicy="strict-origin-when-cross-origin"
-      ></iframe> */}
+    <div className="absolute inset-0 w-full h-full overflow-hidden">
       <ReactPlayer
         key={movieId}
         url={`https://www.youtube.com/watch?v=${trailerVideo.key}`}
         playing={isPlaying}
-        muted={true}
+        muted={false}
+        controls={false}
         width="100%"
         height="100%"
-        className="w-screen aspect-video"
+        className="absolute top-0 left-0 w-full h-full"
+        style={{
+          objectFit: "cover",
+        }}
       />
     </div>
   );

@@ -1,19 +1,19 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { API_OPTIONS } from "../utils/constants";
 import { addTrailerVideo } from "../utils/moviesSlice";
 import { useEffect } from "react";
 
-//fetch trailer video && updating the store with trailer video data
+// TMDB trailer loader: fetches the best matching trailer for a movie and
+// normalizes it into the movies slice. Intentional side‑effect hook.
 const useMovieTrailer = (movieId) => {
   const dispatch = useDispatch();
-  const trailerVideo = useSelector((store) => store.movies.trailerVideo);
 
   const getMoviesVideos = async () => {
     const data = await fetch(
       "https://api.themoviedb.org/3/movie/" +
         movieId +
         "/videos?language=en-US",
-      API_OPTIONS
+      API_OPTIONS,
     );
     const json = await data.json();
     const filterData = json.results.filter((video) => video.type === "Trailer");
@@ -23,7 +23,6 @@ const useMovieTrailer = (movieId) => {
   };
   useEffect(() => {
     getMoviesVideos();
-    console.log(trailerVideo);
-  }, [movieId]);
+  }, [movieId]); // eslint-disable-line react-hooks/exhaustive-deps -- fetch only when movieId changes
 };
 export default useMovieTrailer;

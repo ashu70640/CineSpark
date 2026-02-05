@@ -1,5 +1,6 @@
+// GPT search slice: tracks whether the experience is active plus the last set
+// of movie names and hydrated TMDB results.
 import { createSlice } from "@reduxjs/toolkit";
-
 const gptSlice = createSlice({
   name: "gpt",
   initialState: {

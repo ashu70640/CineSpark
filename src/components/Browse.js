@@ -1,3 +1,5 @@
+// Authenticated home surface: orchestrates data bootstrapping hooks and switches
+// between GPT search and the curated browse experience.
 import { useSelector } from "react-redux";
 import useNowPlayingMovies from "../hooks/useNowPlayingMovies";
 import usePopularMovies from "../hooks/usePopularMovies";
@@ -8,6 +10,7 @@ import SecondaryContainer from "./SecondaryContainer";
 import { useRef, useState } from "react";
 import useTopRatedMovies from "../hooks/useTopRatesMovies";
 import useUpcomingMovies from "../hooks/useUpcomingMovies";
+import WatchlistDrawer from "./WatchlistDrawer";
 
 const Browse = () => {
   const showGptSearch = useSelector((store) => store.gpt.showGptSearch);
@@ -19,18 +22,22 @@ const Browse = () => {
   //   console.log(movieId);
   //   setIsPlaying(true); // Auto-play the new trailer
   // };
+  const [isWatchlistOpen, setIsWatchlistOpen] = useState(false);
+
   useNowPlayingMovies();
   usePopularMovies();
   useTopRatedMovies();
   useUpcomingMovies();
   const scrollToTrailer = () => {
     if (mainContainerRef.current) {
+      // Keep trailer reveal smooth and platform-like instead of an abrupt jump.
       mainContainerRef.current.scrollIntoView({ behavior: "smooth" });
     }
   };
   return (
     <div>
-      <Header />
+      <Header onWatchlistClick={() => setIsWatchlistOpen(true)} />
+
       {showGptSearch ? (
         <GptSearch />
       ) : (
@@ -48,7 +55,10 @@ const Browse = () => {
           />
         </div>
       )}
-
+      <WatchlistDrawer
+        isOpen={isWatchlistOpen}
+        onClose={() => setIsWatchlistOpen(false)}
+      />
       {/*
         MainContainer
           -VideoBackground

@@ -1,44 +1,69 @@
 import React from "react";
 import { IMG_CDN_URL } from "../utils/constants";
+import { useDispatch, useSelector } from "react-redux";
+import { addToWatchlist } from "../utils/watchlistSlice";
 
-const MovieCard = ({
-  posterPath,
-  addToWatchlist,
-  watchlist,
-  movieId,
-  displayMovie,
-}) => {
+const MovieCard = ({ posterPath, movieId, displayMovie }) => {
+  const dispatch = useDispatch();
+  const watchlist = useSelector((store) => store.watchlist.items);
+
   const isInWatchlist =
-    watchlist && Array.isArray(watchlist)
-      ? watchlist.some((item) => item.id === movieId)
-      : false;
-  if (!posterPath) return null;
+    Array.isArray(watchlist) && watchlist.some((item) => item.id === movieId);
+
+  const poster = displayMovie?.poster_path ?? posterPath;
+  const title = displayMovie?.title ?? "Movie";
+
+  if (!poster) return null;
+
   return (
-    <div className="w-36 md:w-48 pr-4">
-      <div>
-        <div className="relative group">
-          <img
-            src={IMG_CDN_URL + displayMovie.poster_path}
-            alt={displayMovie.title}
-            className="w-full h-auto rounded-lg shadow-md hover:scale-105 transition-transform duration-200"
-          />
-          <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200 bg-black bg-opacity-50 rounded-lg">
-            <span className="text-white text-sm text-center px-2">
-              {displayMovie.title}
-            </span>
-          </div>
-        </div>
-        <button
-          onClick={addToWatchlist}
-          disabled={isInWatchlist}
-          className={`mt-2 px-3 py-1 text-white text-sm rounded-md transition-colors duration-200 ${
-            isInWatchlist
-              ? "bg-gray-600 cursor-not-allowed"
-              : "bg-blue-600 hover:bg-blue-700"
-          }`}
+    <div
+      className="w-32 sm:w-36 md:w-48 pr-3 sm:pr-4 group cursor-pointer"
+      data-testid="movie-card"
+    >
+      <div className="relative aspect-[2/3] rounded-lg overflow-hidden bg-gray-800">
+        {/* Poster */}
+        <img
+          src={IMG_CDN_URL + poster}
+          alt={title}
+          className="w-full h-full object-cover
+                     transition-transform duration-300
+                     sm:group-hover:scale-105"
+        />
+
+        {/* Overlay */}
+        <div
+          className="absolute inset-0 flex flex-col justify-end p-3
+                     bg-black/60
+                     opacity-100 sm:opacity-0
+                     sm:group-hover:opacity-100
+                     transition-opacity duration-300"
         >
-          {isInWatchlist ? "Added" : "Add to Watchlist"}
-        </button>
+          {/* Title */}
+          <p className="text-white text-xs sm:text-sm font-medium mb-2 line-clamp-2">
+            {title}
+          </p>
+
+          {/* Watchlist Button */}
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              dispatch(addToWatchlist(displayMovie));
+            }}
+            disabled={isInWatchlist}
+            className={`w-full flex items-center justify-center
+                        min-h-[40px]
+                        text-xs sm:text-sm font-semibold
+                        rounded-md
+                        transition-all duration-200
+              ${
+                isInWatchlist
+                  ? "bg-gray-700 text-gray-300 cursor-not-allowed"
+                  : "bg-amber-400 text-black hover:bg-amber-300"
+              }`}
+          >
+            {isInWatchlist ? "✓ Added" : "+ Watchlist"}
+          </button>
+        </div>
       </div>
     </div>
   );

@@ -1,5 +1,6 @@
+// Central movie domain slice: keeps all carousel, trailer, and playback state
+// co-located so components can stay mostly stateless.
 import { createSlice } from "@reduxjs/toolkit";
-
 const moviesSlice = createSlice({
   name: "movies",
   initialState: {

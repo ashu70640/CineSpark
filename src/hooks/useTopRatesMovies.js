@@ -17,6 +17,6 @@ const useTopRatedMovies = () => {
   };
   useEffect(() => {
     !topRatedMovies && getTopRatedMovies();
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps -- run once on mount
 };
 export default useTopRatedMovies;

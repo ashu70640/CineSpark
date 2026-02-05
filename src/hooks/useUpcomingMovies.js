@@ -12,11 +12,10 @@ const useUpcomingMovies = () => {
       API_OPTIONS
     );
     const json = await data.json();
-    console.log(json);
     dispatch(addUpcomingMovies(json.results));
   };
   useEffect(() => {
     !upcomingMovies && getUpcomingMovies();
-  }, []);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps -- run once on mount
 };
 export default useUpcomingMovies;

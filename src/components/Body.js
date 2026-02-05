@@ -1,8 +1,10 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Login from "./Login";
 import Browse from "./Browse";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
+// Application-level router configuration: keeps auth and browse flows decoupled
+// from visual layout components.
 const Body = () => {
   const appRouter = createBrowserRouter([
     {

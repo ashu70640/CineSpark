@@ -1,3 +1,6 @@
+// Horizontal watchlist rail that stays in sync with trailer playback in the
+// hero section. Local state is owned by the parent; this component only emits
+// intent (play/remove).
 import React from "react";
 import { IMG_CDN_URL } from "../utils/constants";
 import { useDispatch } from "react-redux";

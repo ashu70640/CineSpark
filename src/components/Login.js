@@ -29,7 +29,7 @@ const Login = () => {
       : checkValidData(
           email.current.value,
           password.current.value,
-          name.current.value
+          name.current.value,
         );
     setErrorMessage(message);
 
@@ -42,7 +42,7 @@ const Login = () => {
       createUserWithEmailAndPassword(
         auth,
         email.current.value,
-        password.current.value
+        password.current.value,
       )
         .then((userCredential) => {
           // Signed up
@@ -61,7 +61,7 @@ const Login = () => {
                   email: email,
                   displayName: displayName,
                   photoURL: photoURL,
-                })
+                }),
               );
 
               // ...
@@ -87,14 +87,11 @@ const Login = () => {
       signInWithEmailAndPassword(
         auth,
         email.current.value,
-        password.current.value
+        password.current.value,
       )
         .then((userCredential) => {
-          // Signed in
-
-          const user = userCredential.user;
-
-          //...
+          // Signed in - userCredential.user available if needed
+          void userCredential.user;
         })
         .catch((error) => {
           const errorCode = error.code;
@@ -109,56 +106,103 @@ const Login = () => {
     setIsSignInForm(!isSignInForm);
   };
   return (
-    <div>
+    <div className="relative min-h-screen bg-black">
+      {/* Header (logo only looks good here) */}
       <Header />
-      <div className="absolute">
+
+      {/* Background */}
+      <div className="absolute inset-0">
         <img
-          className="h-screen w-screen object-cover"
+          className="h-full w-full object-cover"
           src={BG_URL}
-          alt="logo"
+          alt="background"
         />
+        <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" />
       </div>
-      <form
-        onSubmit={(e) => e.preventDefault()}
-        className="w-3/4 md:w-1/4 absolute p-12 bg-black text-white bg-opacity-80 rounded-lg top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
-      >
-        <h1 className="font-bold text-2xl py-4">
-          {isSignInForm ? "Sign In" : "Sign Up"}
-        </h1>
-        {!isSignInForm && (
-          <input
-            ref={name}
-            type="text"
-            placeholder="Full Name"
-            className="p-3 my-4 w-full bg-gray-700 rounded-md"
-          />
-        )}
-        <input
-          ref={email}
-          type="text"
-          placeholder="Email Address"
-          className="p-3 my-4 w-full bg-gray-700 rounded-md"
-        />
-        <input
-          ref={password}
-          type="password"
-          placeholder="Password"
-          className="p-3 my-4 w-full bg-gray-700 rounded-md"
-        />
-        <p className="text-red-500 font-bold text-lg py-2">{errorMessage}</p>
-        <button
-          type="submit"
-          className="p-3 my-6 bg-red-600 text-white w-full rounded-lg"
-          onClick={handleButtonClick}
+
+      {/* Auth Card */}
+      <div className="relative z-10 flex items-center justify-center min-h-screen px-4">
+        <form
+          onSubmit={(e) => e.preventDefault()}
+          className="w-full max-w-md bg-black/80 backdrop-blur-xl
+                   border border-white/10 rounded-2xl p-8 shadow-2xl"
         >
-          {isSignInForm ? "Sign In" : "Sign Up"}
-        </button>
-        <p className="p-2 my-2 cursor-pointer" onClick={toggleSignInForm}>
-          {isSignInForm
-            ? "New to CineSpark? Sign Up Now"
-            : "Already a User? Sign In Now"}
-        </p>
-      </form>
+          {/* Brand + Tagline */}
+          <div className="mb-8 text-center">
+            <h1 className="text-2xl font-semibold text-white tracking-wide">
+              CineSpark
+            </h1>
+            <p className="text-sm text-amber-400 mt-1">
+              Trailers you love, one place.
+            </p>
+          </div>
+
+          {/* Title */}
+          <h2 className="text-xl font-medium text-white mb-6">
+            {isSignInForm ? "Welcome back" : "Create your account"}
+          </h2>
+
+          {/* Name */}
+          {!isSignInForm && (
+            <input
+              ref={name}
+              type="text"
+              placeholder="Full Name"
+              className="w-full mb-4 px-4 py-3 rounded-lg
+                       bg-white/10 text-white placeholder-white/50
+                       focus:outline-none focus:ring-2 focus:ring-amber-400"
+            />
+          )}
+
+          {/* Email */}
+          <input
+            ref={email}
+            type="email"
+            placeholder="Email address"
+            className="w-full mb-4 px-4 py-3 rounded-lg
+                     bg-white/10 text-white placeholder-white/50
+                     focus:outline-none focus:ring-2 focus:ring-amber-400"
+          />
+
+          {/* Password */}
+          <input
+            ref={password}
+            type="password"
+            placeholder="Password"
+            className="w-full mb-4 px-4 py-3 rounded-lg
+                     bg-white/10 text-white placeholder-white/50
+                     focus:outline-none focus:ring-2 focus:ring-amber-400"
+          />
+
+          {/* Error */}
+          {errorMessage && (
+            <p className="text-red-400 text-sm mb-4">{errorMessage}</p>
+          )}
+
+          {/* Submit */}
+          <button
+            type="submit"
+            onClick={handleButtonClick}
+            className="w-full py-3 rounded-lg bg-amber-400
+                     text-black font-semibold
+                     hover:bg-amber-300 active:scale-[0.98]
+                     transition-all duration-200"
+          >
+            {isSignInForm ? "Sign In" : "Sign Up"}
+          </button>
+
+          {/* Toggle */}
+          <p
+            className="mt-6 text-sm text-white/70 text-center cursor-pointer
+                     hover:text-amber-400 transition-colors"
+            onClick={toggleSignInForm}
+          >
+            {isSignInForm
+              ? "New to CineSpark? Create an account"
+              : "Already a member? Sign in"}
+          </p>
+        </form>
+      </div>
     </div>
   );
 };

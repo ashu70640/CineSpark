@@ -1,3 +1,5 @@
+// Discovery rail section: owns filter-driven TMDB queries, list orchestration,
+// and a local watchlist view that complements the global drawer.
 import { useEffect, useState } from "react";
 import MoviesList from "./MoviesList";
 import { useSelector, useDispatch } from "react-redux";
@@ -5,7 +7,6 @@ import SearchFilters from "./SearchFilter";
 import { addFilteredMovies } from "../utils/moviesSlice";
 import Watchlist from "./WatchList";
 import { API_OPTIONS } from "../utils/constants";
-
 const SecondaryContainer = ({ scrollToTrailer }) => {
   const dispatch = useDispatch();
   const movies = useSelector((store) => store.movies);
@@ -13,7 +14,7 @@ const SecondaryContainer = ({ scrollToTrailer }) => {
   const [error, setError] = useState(null);
 
   const [watchlist, setWatchlist] = useState(
-    JSON.parse(localStorage.getItem("watchlist") || "[]")
+    JSON.parse(localStorage.getItem("watchlist") || "[]"),
   );
 
   useEffect(() => {
@@ -22,6 +23,8 @@ const SecondaryContainer = ({ scrollToTrailer }) => {
   const handleFilterChange = async (filters) => {
     setIsLoading(true);
     try {
+      // Build the discover query server‑side to keep the filter component
+      // presentational and make the fetch shape easy to evolve.
       const query = new URLSearchParams({
         include_adult: "false",
         include_video: "false",
@@ -32,9 +35,8 @@ const SecondaryContainer = ({ scrollToTrailer }) => {
       }).toString();
       const response = await fetch(
         `https://api.themoviedb.org/3/discover/movie?${query}`,
-        API_OPTIONS
+        API_OPTIONS,
       );
-      console.log("error fetching api ", response);
       if (!response.ok) throw new Error("Failed to fetch filtered movies");
       const data = await response.json();
       console.log("Filtered movies data:", data.results);
@@ -109,11 +111,6 @@ const SecondaryContainer = ({ scrollToTrailer }) => {
             scrollToTrailer={scrollToTrailer}
           />
         </div>
-        <Watchlist
-          watchlist={watchlist}
-          setWatchlist={setWatchlist}
-          scrollToTrailer={scrollToTrailer}
-        />
       </div>
     )
   );

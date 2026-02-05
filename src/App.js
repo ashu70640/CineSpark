@@ -1,3 +1,4 @@
+// Root application shell: wires Redux, routing, and lazy boundaries together.
 import Body from "./components/Body";
 import { Provider } from "react-redux";
 import appStore from "./utils/appStore";
