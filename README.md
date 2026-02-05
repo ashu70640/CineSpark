@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # 🎬 CineSpark — AI-Powered Movie Discovery Platform
 
 CineSpark is a modern cinematic movie discovery platform designed to deliver an immersive browsing experience with intelligent recommendations, dynamic trailer previews, and responsive UI.
@@ -187,3 +188,4 @@ REACT_TMDB_API_KEY=
 REACT_FIREBASE_CONFIG=
 REACT_OPENAI_API_KEY=
 ```
+
