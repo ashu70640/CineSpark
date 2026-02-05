@@ -183,7 +183,7 @@ npm run build
 Create `.env` file in project root:
 
 ```env
-VITE_TMDB_API_KEY=
-VITE_FIREBASE_CONFIG=
-VITE_OPENAI_API_KEY=
+REACT_TMDB_API_KEY=
+REACT_FIREBASE_CONFIG=
+REACT_OPENAI_API_KEY=
 ```
